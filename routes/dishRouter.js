@@ -236,11 +236,10 @@ dishRouter
           if (dish != null && dish.comments.id(req.params.commentId) != null) {
             let commentAuthorID = dish.comments.id(req.params.commentId).author
               ._id;
-            let userID = req.user.id;
+            let userID = req.user._id;
             console.log('User ID: ' + userID);
             console.log('comment author ID: ' + commentAuthorID);
-            //if (userID.equals(commentAuthorID)) {
-            if (userID.valueOf() == commentAuthorID.valueOf()) {
+            if (userID.equals(commentAuthorID)) {
               if (req.body.rating) {
                 dish.comments.id(req.params.commentId).rating = req.body.rating;
               }
@@ -288,11 +287,10 @@ dishRouter
           if (dish != null && dish.comments.id(req.params.commentId) != null) {
             let commentAuthorID = dish.comments.id(req.params.commentId).author
               ._id;
-            let userID = req.user.id;
+            let userID = req.user._id;
             console.log('User ID: ' + userID);
             console.log('comment author ID: ' + commentAuthorID);
-            //if (userID.equals( commentAuthorID)) {
-            if (userID.valueOf() == commentAuthorID.valueOf()) {
+            if (userID.equals(commentAuthorID)) {
               dish.comments.id(req.params.commentId).remove();
               dish.save().then(
                 dish => {

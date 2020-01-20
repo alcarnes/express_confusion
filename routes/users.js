@@ -8,8 +8,9 @@ var router = express.Router();
 router.use(bodyParser.json());
 
 /* GET users listing. */
-router.route('/')
-    .get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+router
+  .route('/')
+  .get(authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
     User.find({})
       .then(
         user => {
@@ -20,7 +21,7 @@ router.route('/')
         err => next(err),
       )
       .catch(err => next(err));
-});
+  });
 
 router.post('/signup', (req, res, next) => {
   User.register(
@@ -67,7 +68,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
   });
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   if (req.session) {
     req.session.destroy();
     res.clearCookie('session-id');
